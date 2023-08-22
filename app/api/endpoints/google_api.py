@@ -1,3 +1,4 @@
+import logging
 from typing import List
 
 from aiogoogle import Aiogoogle
@@ -29,10 +30,10 @@ async def get_report(
     projects = await charity_project_crud.get_projects_by_completion_rate(
         session
     )
-    spreadsheetid = await spreadsheets_create(wrapper_services)
+    spreadsheetid = await spreadsheets_create(wrapper_services, len(projects) + 4)
     await set_user_permissions(spreadsheetid, wrapper_services)
     await spreadsheets_update_value(spreadsheetid,
                                     projects,
                                     wrapper_services)
-    print(f'https://docs.google.com/spreadsheets/d/{spreadsheetid}')
+    logging.info(f'https://docs.google.com/spreadsheets/d/{spreadsheetid}')
     return projects

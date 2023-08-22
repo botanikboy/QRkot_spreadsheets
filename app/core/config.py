@@ -3,7 +3,7 @@ from typing import Optional
 
 from pydantic import BaseSettings, EmailStr
 
-from app.core.constants import DT_FORMAT, LOG_FORMAT
+from app.core.constants import LOG_DT_FORMAT, LOG_FORMAT
 
 
 class Settings(BaseSettings):
@@ -31,7 +31,7 @@ class Settings(BaseSettings):
 
 def configure_logging():
     logging.basicConfig(
-        datefmt=DT_FORMAT,
+        datefmt=LOG_DT_FORMAT,
         format=LOG_FORMAT,
         level=logging.INFO,
         handlers=(logging.StreamHandler(),)

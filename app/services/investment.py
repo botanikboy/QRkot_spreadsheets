@@ -22,8 +22,7 @@ async def invest_funds(
         session: AsyncSession
 ):
     db_obj_all = await session.execute(select(db_model).where(
-        # в этом выражении не проходит сравнение через is, я уже пытался, принимает только ==
-        db_model.fully_invested == False # noqa
+        db_model.fully_invested == 1
     ).order_by(db_model.create_date))
     db_obj_all: List[
         Union[Donation, CharityProject]] = db_obj_all.scalars().all()
