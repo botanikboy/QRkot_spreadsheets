@@ -30,8 +30,8 @@ class CRUDCharityProject(CRUDBase):
             select(CharityProject).where(
                 CharityProject.fully_invested == True, # noqa
             ).order_by(
-                func.strftime('%s', CharityProject.close_date)
-                - func.strftime('%s', CharityProject.create_date))
+                func.strftime('%s', CharityProject.close_date) -
+                func.strftime('%s', CharityProject.create_date))
         )
         closed_projects = closed_projects.scalars().all()
         return closed_projects
