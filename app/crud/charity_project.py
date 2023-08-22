@@ -29,7 +29,9 @@ class CRUDCharityProject(CRUDBase):
         closed_projects = await session.execute(
             select(CharityProject).where(
                 CharityProject.fully_invested == True, # noqa
-            ).order_by(func.strftime('%s', CharityProject.close_date - CharityProject.create_date))
+            ).order_by(
+                func.strftime('%s', CharityProject.close_date)
+                - func.strftime('%s', CharityProject.create_date))
         )
         # не сортирует по timedelta никак не срабатывает, strftime должен помочь, но все равно сортировка не происходит
         closed_projects = closed_projects.scalars().all()
