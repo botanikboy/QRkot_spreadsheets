@@ -33,7 +33,6 @@ class CRUDCharityProject(CRUDBase):
                 func.strftime('%s', CharityProject.close_date)
                 - func.strftime('%s', CharityProject.create_date))
         )
-        # не сортирует по timedelta никак не срабатывает, strftime должен помочь, но все равно сортировка не происходит
         closed_projects = closed_projects.scalars().all()
         return closed_projects
 
