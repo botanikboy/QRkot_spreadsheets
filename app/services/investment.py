@@ -22,7 +22,7 @@ async def invest_funds(
         session: AsyncSession
 ):
     db_obj_all = await session.execute(select(db_model).where(
-        db_model.fully_invested == 1
+        db_model.fully_invested == 0
     ).order_by(db_model.create_date))
     db_obj_all: List[
         Union[Donation, CharityProject]] = db_obj_all.scalars().all()
